@@ -217,7 +217,6 @@ const createList = (availableItems) => {
 };
 
 
-
 // ------------------------------------------------------------------------------------------------
 // CHALLENGE 10
 //
@@ -233,7 +232,20 @@ const createList = (availableItems) => {
 // ------------------------------------------------------------------------------------------------
 
 const fizzbuzz = (arr) => {
-  // Solution code here...
+  var newArr = [];
+  arr.forEach( function (item, i){
+    if (arr[i] % 3 === 0 && arr[i] % 5 === 0) {
+      newArr.push('Fizz Buzz');
+    } else if (arr[i] % 3 === 0) {
+      newArr.push('Fizz'); 
+    } else if (arr[i] % 5 === 0){
+      newArr.push('Buzz'); 
+    } else {
+      newArr.push(arr[i]); 
+    }
+  }
+  );
+  return newArr;
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -247,61 +259,61 @@ const fizzbuzz = (arr) => {
 //
 // ------------------------------------------------------------------------------------------------
 
-// describe('Testing challenge 1', () => {
-//   test('It should push all of the elements from the first array into the second array', () => {
-//     expect(pushIntoSecond([1, 2, 3, 4, 5])).toStrictEqual([ 1, 2, 3, 4, 5 ]);
-//   });
-// });
+describe('Testing challenge 1', () => {
+  test('It should push all of the elements from the first array into the second array', () => {
+    expect(pushIntoSecond([1, 2, 3, 4, 5])).toStrictEqual([ 1, 2, 3, 4, 5 ]);
+  });
+});
 
-// describe('Testing challenge 2', () => {
-//   test('It should add five bonus points to each raw score', () => {
-//     expect(addBonusPoints([55, 79, 100, 85, 92])).toStrictEqual([ 60, 84, 105, 90, 97 ]);
-//   });
-// });
+describe('Testing challenge 2', () => {
+  test('It should add five bonus points to each raw score', () => {
+    expect(addBonusPoints([55, 79, 100, 85, 92])).toStrictEqual([ 60, 84, 105, 90, 97 ]);
+  });
+});
 
-// describe('Testing challenge 3', () => {
-//   test('It should increase each raw score by 5%', () => {
-//     const resultScores = addCurve([55, 79, 100, 85, 92]);
-//     const expectedScores = [ 57.75, 82.95, 105, 89.25, 96.60000000000001 ];
-//     for (let i in expectedScores) {
-//       expect(resultScores[i]).toBeCloseTo(expectedScores[i]);
-//     }
-//   });
-// });
+describe('Testing challenge 3', () => {
+  test('It should increase each raw score by 5%', () => {
+    const resultScores = addCurve([55, 79, 100, 85, 92]);
+    const expectedScores = [ 57.75, 82.95, 105, 89.25, 96.60000000000001 ];
+    for (let i in expectedScores) {
+      expect(resultScores[i]).toBeCloseTo(expectedScores[i]);
+    }
+  });
+});
 
-// describe('Testing challenge 4', () => {
-//   test('It should return the message with all uppercase characters', () => {
-//     expect(speaker('hello 301 students!', greeting)).toStrictEqual('HELLO 301 STUDENTS!');
-//   });
-// });
+describe('Testing challenge 4', () => {
+  test('It should return the message with all uppercase characters', () => {
+    expect(speaker('hello 301 students!', greeting)).toStrictEqual('HELLO 301 STUDENTS!');
+  });
+});
 
-// describe('Testing challenge 5', () => {
-//   test('It should add the number 8 to the array five times', () => {
-//     expect(addNumbers(8, [], 5, addValues)).toStrictEqual([ 8, 8, 8, 8, 8 ]);
-//     expect(addNumbers(8, [], 5, addValues).length).toStrictEqual(5);
-//   });
-// });
+describe('Testing challenge 5', () => {
+  test('It should add the number 8 to the array five times', () => {
+    expect(addNumbers(8, [], 5, addValues)).toStrictEqual([ 8, 8, 8, 8, 8 ]);
+    expect(addNumbers(8, [], 5, addValues).length).toStrictEqual(5);
+  });
+});
 
-// describe('Testing challenge 6', () => {
-//   test('It should remove three elements from the array', () => {
-//     expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne)).toStrictEqual([ 1, 2, 3, 4, 5, 6, 7 ]);
-//     expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne).length).toStrictEqual(7);
-//   });
-// });
+describe('Testing challenge 6', () => {
+  test('It should remove three elements from the array', () => {
+    expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne)).toStrictEqual([ 1, 2, 3, 4, 5, 6, 7 ]);
+    expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne).length).toStrictEqual(7);
+  });
+});
 
-// describe('Testing challenge 7', () => {
-//   test('It should remove three elements from the array', () => {
-//     expect(removeWithForEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne)).toStrictEqual([ 1, 2, 3, 4, 5, 6, 7 ]);
-//     expect(removeWithForEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne).length).toStrictEqual(7);
-//   });
-// });
+describe('Testing challenge 7', () => {
+  test('It should remove three elements from the array', () => {
+    expect(removeWithForEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne)).toStrictEqual([ 1, 2, 3, 4, 5, 6, 7 ]);
+    expect(removeWithForEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne).length).toStrictEqual(7);
+  });
+});
 
-// describe('Testing challenge 8', () => {
-//   test('It should remove three elements from the array', () => {
-//     expect(removeWithAnon([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])).toStrictEqual([ 1, 2, 3, 4, 5, 6, 7 ]);
-//     expect(removeWithAnon([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).length).toStrictEqual(7);
-//   });
-// });
+describe('Testing challenge 8', () => {
+  test('It should remove three elements from the array', () => {
+    expect(removeWithAnon([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])).toStrictEqual([ 1, 2, 3, 4, 5, 6, 7 ]);
+    expect(removeWithAnon([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).length).toStrictEqual(7);
+  });
+});
 
 describe('Testing challenge 9', () => {
   const inventory = [ { name: 'apples', available: true, }, { name: 'pears', available: true, }, { name: 'oranges', available: false, }, { name: 'bananas', available: true, }, { name: 'blueberries', available: false, } ];
@@ -312,13 +324,13 @@ describe('Testing challenge 9', () => {
   });
 });
 
-// describe('Testing challenge 10', () => {
-//   const inputs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+describe('Testing challenge 10', () => {
+  const inputs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
-//   test('It should print out messages or numbers', () => {
-//     expect(fizzbuzz(inputs)).toStrictEqual([ 1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'Fizz Buzz', 16 ]);
-//     expect(fizzbuzz(inputs).length).toStrictEqual(16);
-//   });
-// });
+  test('It should print out messages or numbers', () => {
+    expect(fizzbuzz(inputs)).toStrictEqual([ 1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'Fizz Buzz', 16 ]);
+    expect(fizzbuzz(inputs).length).toStrictEqual(16);
+  });
+});
 
 
