@@ -90,11 +90,21 @@ const speaker = (message, callback) => {
 // ------------------------------------------------------------------------------------------------
 
 const addValues = (arr, value) => {
-  // Solution code here...
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++){
+    newArr.push(arr[i]);
+  }
+  newArr.push(value);
+  return newArr;
 };
 
 const addNumbers = (num, arr, times, callback) => {
-  // Solution code here...
+  var arrAnswer = [];
+  for (var i = 0; i < times; i++){
+    // arrAnswer.push(num);
+    arrAnswer = addValues(arrAnswer, num);
+  }
+  return arrAnswer;
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -112,11 +122,21 @@ const addNumbers = (num, arr, times, callback) => {
 // ------------------------------------------------------------------------------------------------
 
 const removeOne = (num, input) => {
-  // Solution code here...
+  if (num % 3 == 2){
+    input.pop();
+  }
+  return input;
 };
 
 const removeElements = (input, callback) => {
-  // Solution code here...
+  var arrModified = [];
+  for (var a = 0; a < input.length; a++){
+    arrModified.push(input[a]);
+  }
+  for (var i = 0; i < input.length; i++){
+    removeOne(input[i], arrModified);
+  }
+  return arrModified;
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -223,19 +243,19 @@ const fizzbuzz = (arr) => {
 //   });
 // });
 
-describe('Testing challenge 5', () => {
-  test('It should add the number 8 to the array five times', () => {
-    expect(addNumbers(8, [], 5, addValues)).toStrictEqual([ 8, 8, 8, 8, 8 ]);
-    expect(addNumbers(8, [], 5, addValues).length).toStrictEqual(5);
-  });
-});
-
-// describe('Testing challenge 6', () => {
-//   test('It should remove three elements from the array', () => {
-//     expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne)).toStrictEqual([ 1, 2, 3, 4, 5, 6, 7 ]);
-//     expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne).length).toStrictEqual(7);
+// describe('Testing challenge 5', () => {
+//   test('It should add the number 8 to the array five times', () => {
+//     expect(addNumbers(8, [], 5, addValues)).toStrictEqual([ 8, 8, 8, 8, 8 ]);
+//     expect(addNumbers(8, [], 5, addValues).length).toStrictEqual(5);
 //   });
 // });
+
+describe('Testing challenge 6', () => {
+  test('It should remove three elements from the array', () => {
+    expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne)).toStrictEqual([ 1, 2, 3, 4, 5, 6, 7 ]);
+    expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne).length).toStrictEqual(7);
+  });
+});
 
 // describe('Testing challenge 7', () => {
 //   test('It should remove three elements from the array', () => {
