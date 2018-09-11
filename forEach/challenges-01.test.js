@@ -204,9 +204,19 @@ const removeWithAnon = (input) => {
 // If the item is available, add it to your list. Return the final list.
 // ------------------------------------------------------------------------------------------------
 
+
 const createList = (availableItems) => {
-  // Solution code here...
+  var newArr = [];
+  availableItems.forEach( function(item, i){
+    if (availableItems[i].available === true){
+      newArr.push(availableItems[i].name);
+    }
+  }
+  );
+  return newArr;
 };
+
+
 
 // ------------------------------------------------------------------------------------------------
 // CHALLENGE 10
@@ -294,7 +304,7 @@ const fizzbuzz = (arr) => {
 // });
 
 describe('Testing challenge 9', () => {
-  const inventory = [ { name: 'apples', available: true }, { name: 'pears', available: true }, { name: 'oranges', available: false }, { name: 'bananas', available: true }, { name: 'blueberries', available: false } ];
+  const inventory = [ { name: 'apples', available: true, }, { name: 'pears', available: true, }, { name: 'oranges', available: false, }, { name: 'bananas', available: true, }, { name: 'blueberries', available: false, } ];
 
   test('It should only add the available items to the list', () => {
     expect(createList(inventory)).toStrictEqual([ 'apples', 'pears', 'bananas' ]);
