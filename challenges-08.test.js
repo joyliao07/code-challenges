@@ -155,9 +155,7 @@ const characters = [
 ];
 
 const getCharactersWithoutChildren = (input) => {
-  return characters.filter( each => {
-    return Object.keys(each).indexOf('children') === -1;
-  });
+  return input.filter( each =>  Object.keys(each).indexOf('children') === -1);
 };
 
 /* ------------------------------------------------------------------------------------------------
