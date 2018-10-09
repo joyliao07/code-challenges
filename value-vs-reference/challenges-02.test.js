@@ -10,8 +10,7 @@
 // ------------------------------------------------------------------------------------------------
 
 const appendTheEnd = (str) => {
-  let strNew = str.concat(' The end.');
-  str = strNew;
+  str = str.concat(' The end.');
   return str;
 }
 
@@ -32,7 +31,6 @@ const appendTheEnd = (str) => {
 
 const appendFirstToLast = (list) => {
   list.push(list[0]);
-  console.log(list);
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -52,7 +50,6 @@ const appendFirstToLast = (list) => {
 
 const addBirthYearProperty = (obj, year) => {
   obj.yearBorn = year;
-  console.log(obj);
 }
 
 
@@ -73,10 +70,7 @@ const addBirthYearProperty = (obj, year) => {
 // ------------------------------------------------------------------------------------------------
 
 const setStatusAsAuthor = (people) => {
-  for (var i = 0; i < people.length; i++){
-    people[i].isAuthor = true;
-  }
-  console.log(people.isAuthor);
+  people.forEach(person => person.isAuthor = true);
 }
 
 
@@ -98,11 +92,7 @@ const setStatusAsAuthor = (people) => {
 // ------------------------------------------------------------------------------------------------
 
 const append = (list1, list2) => {
-  for (var i = 0; i < list2.length; i++){
-    list1.push(list2[i]);
-  }
-  console.log(list1);
-
+  for (let item of list2) list1.push(item);
 }
 
 // ------------------------------------------------------------------------------------------------
