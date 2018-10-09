@@ -30,8 +30,10 @@ const pushIntoSecond = (arr) => {
 
 const addBonusPoints = (arr) => {
   var total = [];
-  for (var i = 0; i < arr.length; i++){
-    total.push(arr[i] + 5);
+  // for (var i = 0; i < arr.length; i++){
+  for (let i of arr){
+    // total.push(arr[i] + 5);
+    total.push(i + 5);
   }
   return total;
 };
@@ -48,8 +50,11 @@ const addBonusPoints = (arr) => {
 
 const addCurve = (arr) => {
   var total = [];
-  for (var i = 0; i < arr.length; i++){
-    total.push(arr[i] * 1.05);
+  // for (var i = 0; i < arr.length; i++){
+  //   total.push(arr[i] * 1.05);
+  // }
+  for (let i of arr){
+    total.push(i * 1.05);
   }
   return total;
 };
@@ -68,8 +73,7 @@ const greeting = (word) => {
 };
 
 const speaker = (message, callback) => {
-  return greeting(message);
-  return greeting(callback);
+  return callback(message);
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -90,21 +94,23 @@ const speaker = (message, callback) => {
 // ------------------------------------------------------------------------------------------------
 
 const addValues = (arr, value) => {
-  var newArr = [];
-  for (var i = 0; i < arr.length; i++){
-    newArr.push(arr[i]);
-  }
-  newArr.push(value);
-  return newArr;
+  arr.push(value);
 };
 
+// const addNumbers = (num, arr, times, callback) => {
+//   var arrAnswer = [];
+//   for (var i = 0; i < times; i++){
+//     // arrAnswer.push(num);
+//     arrAnswer = addValues(arrAnswer, num);
+//   }
+//   return arrAnswer;
+// };
+
 const addNumbers = (num, arr, times, callback) => {
-  var arrAnswer = [];
   for (var i = 0; i < times; i++){
-    // arrAnswer.push(num);
-    arrAnswer = addValues(arrAnswer, num);
+    callback(arr, num);
   }
-  return arrAnswer;
+  return arr;
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -122,21 +128,27 @@ const addNumbers = (num, arr, times, callback) => {
 // ------------------------------------------------------------------------------------------------
 
 const removeOne = (num, input) => {
-  if (num % 3 == 2){
+  if (num % 3 === 2){
     input.pop();
   }
-  return input;
 };
 
+// const removeElements = (input, callback) => {
+//   var arrModified = [];
+//   for (var a = 0; a < input.length; a++){
+//     arrModified.push(input[a]);
+//   }
+//   for (var i = 0; i < input.length; i++){
+//     removeOne(input[i], arrModified);
+//   }
+//   return arrModified;
+// };
+
 const removeElements = (input, callback) => {
-  var arrModified = [];
-  for (var a = 0; a < input.length; a++){
-    arrModified.push(input[a]);
+  for (let i = 0; i < input.length; i++) {
+    callback(input[i], input);
   }
-  for (var i = 0; i < input.length; i++){
-    removeOne(input[i], arrModified);
-  }
-  return arrModified;
+  return input;
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -146,23 +158,15 @@ const removeElements = (input, callback) => {
 // ------------------------------------------------------------------------------------------------
 
 const removeWithForEach = (input, callback) => {
-//   var newArr = [];
-//   for (var i = 0; i < input.length; i++){
-//     newArr.push(input[i]);
-//   }
-
-  input.forEach(function(num){
-    // if (num % 3 === 2){
-    //   newArr.pop();
-    // }
-    // newArr.push();
-    callback(num, input);
+  input.forEach(function(elephant){
+    callback(elephant, input);
   });
   return input;
 };
 
 
-// -------------------------------------------------------------------------4
+// ------------------------------------------------------------------------------------------------
+//CHALLENGE 8
 //
 // Write a function named removeWithAnon that produces the same output as challenges 6 and 7.
 //
@@ -173,18 +177,14 @@ const removeWithForEach = (input, callback) => {
 // ------------------------------------------------------------------------------------------------
 
 const removeWithAnon = (input) => {
-  var newArr = [];
-  for (var i = 0; i < input.length; i++){
-    newArr.push(input[i]);
-  }
-
-  input.forEach(function(num, i){
-    if (num % 3 === 2){
-      newArr.pop();
+  input.forEach(function(potato){
+    if (potato % 3 === 2){
+      input.pop();
     }
   });
-  return newArr;
+  return input;
 };
+
 
 // ------------------------------------------------------------------------------------------------
 // CHALLENGE 9
@@ -206,13 +206,10 @@ const removeWithAnon = (input) => {
 
 
 const createList = (availableItems) => {
-  var newArr = [];
-  availableItems.forEach( function(item, i){
-    if (availableItems[i].available === true){
-      newArr.push(availableItems[i].name);
-    }
-  }
-  );
+  const newArr = [];
+  availableItems.forEach( function(item){
+    if (item.available) newArr.push(item.name);
+  });
   return newArr;
 };
 
@@ -233,18 +230,17 @@ const createList = (availableItems) => {
 
 const fizzbuzz = (arr) => {
   var newArr = [];
-  arr.forEach( function (item, i){
-    if (arr[i] % 3 === 0 && arr[i] % 5 === 0) {
+  arr.forEach( function (num){
+    if (num % 3 === 0 && num % 5 === 0) {
       newArr.push('Fizz Buzz');
-    } else if (arr[i] % 3 === 0) {
+    } else if (num % 3 === 0) {
       newArr.push('Fizz'); 
-    } else if (arr[i] % 5 === 0){
+    } else if (num % 5 === 0){
       newArr.push('Buzz'); 
     } else {
-      newArr.push(arr[i]); 
+      newArr.push(num); 
     }
-  }
-  );
+  });
   return newArr;
 };
 
