@@ -29,16 +29,22 @@ const isNum = (num) => {
 // Return an array containing all the matches.
 // ------------------------------------------------------------------------------------------------
 
+// const isCapitalized = (string) => {
+//   const sArr = string.split(' ');
+//   let answer = [];
+//   const regex = RegExp(/[A-Z]/g);
+//   for (let i = 0; i < sArr.length; i++) {
+//     if (regex.test(sArr[i])){
+//       answer.push(sArr[i]);
+//     }
+//   }
+//   return answer;
+// };
+
 const isCapitalized = (string) => {
-  const sArr = string.split(' ');
-  let answer = [];
-  const regex = RegExp(/[A-Z]/g);
-  for (let i = 0; i < sArr.length; i++) {
-    if (regex.test(sArr[i])){
-      answer.push(sArr[i]);
-    }
-  }
-  return answer;
+  const comparison = /[A-Z][a-zA-Z]*/g;
+  return string.match(comparison);
+
 };
 
 
@@ -53,14 +59,13 @@ const isCapitalized = (string) => {
 
 const citiesAtoJ = (cities) => {
   let answer = [];
-  for (let i = 0; i < cities.length; i++){
-    const regex = RegExp(/[A-J]/g);
-    if (regex.test(cities[i][0])){
-      answer.push(cities[i]);
-    }
+  const regex = RegExp(/[A-J]/);
+  for (let city of cities){
+    if (regex.test(city[0])) answer.push(city);
   }
   return answer;
 };
+
 
 
 // ------------------------------------------------------------------------------------------------
@@ -78,17 +83,8 @@ const citiesAtoJ = (cities) => {
 // ------------------------------------------------------------------------------------------------
 
 const matchMonth = (input) => {
-  if ( input.search(/^October$/) === 0 ) {
-    return true;
-  } else if ( input.search(/^Oct$/) === 0 ){
-    return true;
-  } else if ( input.search(/^october$/) === 0 ){
-    return true;
-  } else if ( input.search(/^oct$/) === 0 ){
-    return true;
-  } else {
-    return false;
-  }
+  const comparison = /^[Oo]ct(ober)?$/;
+  return comparison.test(input);
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -105,7 +101,8 @@ const matchMonth = (input) => {
 // ------------------------------------------------------------------------------------------------
 
 const noPunctuation = input => {
-  
+  const comparison = /\w+\s/g;
+  return input.match(comparison);
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -122,7 +119,8 @@ const noPunctuation = input => {
 // ------------------------------------------------------------------------------------------------
 
 let hangman = (str) => {
-  // Solution code here...
+  const comparison = /[AEIOUaeiou]/g;
+  return str.replace(comparison, '_');
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -138,7 +136,8 @@ let hangman = (str) => {
 const seashells = 'She sells seashells by the seashore. The shells she sells are surely seashells. So if she sells shells on the seashore, I\'m sure she sells seashore shells.';
 
 const findShells = (phrase) => {
-  // Solution code here...
+  const comparison = /\b[A-Za-z]*ells\b/g;
+  return phrase.match(comparison);
 };
 
 // ------------------------------------------------------------------------------------------------
