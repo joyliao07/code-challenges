@@ -16,7 +16,7 @@ For example, if the input is 'Welcome', the output will be:
 const howMuchPencil = (str) => {
   let result = [];
   for (let i = 0; i < (str.length + 1); i++){
-    result.push( str.slice(i, str.length));
+    result.push( str.slice(i));
   }
   return result;
 };
@@ -97,7 +97,13 @@ const gruffaloCrumble = {
 
 const listFoods = (recipe) => {
   let result = [];
-  // Solution code here...
+
+  recipe.ingredients.forEach( line => {
+    let first = line.slice(line.indexOf(' ') + 1);
+    let second = first.slice(first.indexOf(' ') + 1);
+    result.push(second);
+  });
+
   return result;
 };
 
@@ -111,7 +117,11 @@ You may also use other array/string functions.
 
 const splitFoods = (recipe) => {
   let result = [];
-  // Solution code here...
+  recipe.ingredients.forEach( line => {
+    let each = line.split(' ');
+    let part = each.slice(2, each.length + 1).join().replace(/,/g, ' ');
+    result.push(part);
+  });
   return result;
 };
 
@@ -182,19 +192,15 @@ For example: removeLastCharacters('Gregor', 2) returns 'Greg'.
 const removeLastCharacters = (str, numberOfCharacters) => {
   if (numberOfCharacters < 0) {
     return str;
-  } else {
+  } if (numberOfCharacters > str.length) {
+    return '';
+  }else {
     let arr = str.split('');
     arr.splice(-numberOfCharacters);
     let arrJoin = arr.join().replace(/,/g, '');
-    console.log('arrJoin is: ', arrJoin);
+    return arrJoin;
   }
-  return arrJoin;
 };
-
-
-
-
-
 
 
 
@@ -207,7 +213,7 @@ For example, removeVowels('gregor') returns 'grgr'.
 ------------------------------------------------------------------------*/
 
 const removeVowels = (str) => {
-  // Solution code here...
+  return str.replace(/[AEIOUaeiou]/g, '');
 };
 
 /*------------------------------------------------------------------------
@@ -221,7 +227,21 @@ Similarly, extractVowels('The quick brown fox') returns ['Th qck brwn fx', 'eioo
 ------------------------------------------------------------------------*/
 
 const extractVowels = (str) => {
-  // Solution code here...
+  let arr = str.split('');
+  let comparison = /[AEIOUaeiou]/;
+  let arr2 = [];
+  let answer = [];
+
+  for (let i = 0; i < arr.length; i++){
+    if (comparison.test(arr[i])) {
+      arr2.push(arr[i]);
+    }
+  }
+
+  answer.push(str.replace(/[AEIOUaeiou]/g, ''));
+  answer.push(arr2.sort().join().replace(/,/g, ''));
+
+  return answer;
 };
 
 /*------------------------------------------------------------------------
