@@ -12,7 +12,7 @@ const courseInfo = { name: 'Code 301', duration: { dayTrack: '4 weeks', eveningT
   finalExam: true, };
 
 const getCourseKeys = (obj) => {
-  return (Object.keys(obj));
+  return Object.keys(obj);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -154,19 +154,19 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 
 const houseSize = (arr) => {
   const sizes = [];
-  for (let i = 0; i < arr.length; i++){
-    sizes.push({});
-    sizes[i].house = Object.values(arr[i])[3];
-    let memberNum;
-    if (Object.values(arr[i])[1]) {
-      memberNum = 1 + Number(Object.values(arr[i])[1].length);
+  arr.forEach( each => {
+    let family = {};
+    let num = 1;
+    if (each.spouse) {
+      num += 1;
     }
-    if (Object.values(arr[i])[2]) {
-      memberNum = sizes.members + Number(Object.values(arr[i])[2].length);
+    if (each.children) {
+      num += each.children.length;
     }
-    sizes[i].members = memberNum;
-  }
-
+    family.house = each.house;
+    family.members = num;
+    sizes.push(family);
+  });
   return sizes;
 };
 
@@ -190,7 +190,17 @@ const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
 const houseSurvivors = (arr) => {
   const survivors = [];
-  // Solution code here...
+  arr.forEach( each => {
+    let family = {};
+    let num = 1;
+    if (each.children) {
+      num += each.children.length;
+    }
+    family.house = each.house;
+    family.members = num;
+    survivors.push(family);
+  });
+
   return survivors;
 };
 
@@ -253,6 +263,6 @@ describe('Testing challenge 6', () => {
 
 describe('Testing challenge 7', () => {
   test('It should not include any deceased spouses', () => {
-    expect(houseSurvivors(characters)).toStrictEqual([ { house: 'Stark', members: 6 }, { house: 'Arryn', members: 2 }, { house: 'Lannister', members: 4 }, { house: 'Targaryen', members: 4 }, { house: 'Tyrell', members: 3 }, { house: 'Stark', members: 2 }, { house: 'Snow', members: 1 } ]);
+    expect(houseSurvivors(characters)).toStrictEqual([ { house: 'Stark', members: 6, }, { house: 'Arryn', members: 2, }, { house: 'Lannister', members: 4, }, { house: 'Targaryen', members: 4, }, { house: 'Tyrell', members: 3, }, { house: 'Stark', members: 1, }, { house: 'Snow', members: 1, } ]);
   });
 });
