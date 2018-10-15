@@ -9,8 +9,7 @@ If the PIN is four numerical digits long, return true. Otherwise, return false.
 ------------------------------------------------------------------------------------------------*/
 
 const validatePin = (pin) => {
-  const regex = RegExp(/^\d{4}$/);
-  return regex.test(pin);
+  return (/^\d{4}$/).test(pin);
 
 };
 
@@ -25,7 +24,10 @@ For example, findTagNames(['<h1>Hello, world!</h1>', '<p>Welcome to my site</p>'
 ------------------------------------------------------------------------------------------------*/
 
 const findTagNames = elements => {
-  // Solution code here...
+  let closing = elements.map(str => str.match(/<(\/[a-z]+\d?)>/g));
+  let arr2 = closing.reduce((acc, val) => acc=acc.concat(val), []);
+  return arr2.map(x => x.slice(1, x.length-1));
+
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -45,7 +47,7 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 ------------------------------------------------------------------------------------------------*/
 
 const validateEmail = (email) => {
-  // Solution code here...
+  return (/^[a-zA-Z0-9]+.[a-zA-Z0-9]+@\w+.(com|net|org)$/).test(email);
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -56,13 +58,13 @@ Write a function named validatePhoneNumber that accepts a phone number and deter
 Acceptable formats include:
  - (555) 555-5555
  - (555)555 5555
- - 555 555-5555 here #3
- - 555-5555555 #4
- - 555-555 5555 #5
- - 555-555-5555 #6
- - 555 555 5555 #7
- - 555555-5555 #8
- - 5555555555 #9
+ - 555 555-5555
+ - 555-5555555
+ - 555-555 5555
+ - 555-555-5555
+ - 555 555 5555
+ - 555555-5555
+ - 5555555555
 
 Your function should include a single regular expression pattern that matches any of these formats.
 
@@ -70,43 +72,7 @@ Return either true or false.
 ------------------------------------------------------------------------------------------------*/
 
 const validatePhoneNumber = (phoneNumber) => {
-  const regex1 = RegExp(/\(\d{3}\)\s\d{3}-\d{4}/);
-  const regex2 = RegExp(/\(\d{3}\)\d{3}\s\d{4}/);
-  const regex3 = RegExp(/^\d{3}\s\d{3}-\d{4}$/);
-  const regex4 = RegExp(/\d{3}-\d{7}/);
-  const regex5 = RegExp(/\d{3}-\d{3}\s\d{4}/);
-  const regex6 = RegExp(/\d{3}-\d{3}-\d{4}/);
-  const regex7 = RegExp(/^\d{3}\s\d{3}\s\d{4}$/);
-  const regex8 = RegExp(/\d{6}-\d{4}/);
-  const regex9 = RegExp(/^\d{10}$/);
-  const regex10 = RegExp(/\d{3}\s\d{7}/);
-//   const regex10 = RegExp(/^\(*\d{3}\)*( |-)*\d{3}( |-)*\d{4}$/);
-//   return phoneNumber.test(phoneNumber);
-  if (regex1.test(phoneNumber) === true){
-    return true;
-  } else if (regex2.test(phoneNumber) === true) {
-    return true;
-  } else if (regex3.test(phoneNumber) === true) {
-    return true;
-  } else if (regex4.test(phoneNumber) === true) {
-    return true;
-  } else if (regex5.test(phoneNumber) === true) {
-    return true;
-  } else if (regex6.test(phoneNumber) === true) {
-    return true;
-  } else if (regex7.test(phoneNumber) === true) {
-    return true;
-  } else if (regex8.test(phoneNumber) === true) {
-    return true;
-  } else if (regex9.test(phoneNumber) === true) {
-    return true;
-  } else if (regex10.test(phoneNumber) === true) {
-    return true;
-  }else {
-    return false;
-  }
-
-
+  return (/^(\(\d{3}\)|\d{3})(\s|-)?\d{3}(\s|-)?\d{4}$/).test(phoneNumber);
 
 };
 
