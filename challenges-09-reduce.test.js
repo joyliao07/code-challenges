@@ -118,7 +118,7 @@ Write a function that, given an array of numbers as input, uses ONE call to filt
 ------------------------------------------------------------------------------------------------*/
 
 const calculateAverage = (input) => {
-  return input.reduce((acc, val, ind) => acc += val) / input.length;
+  return input.reduce((acc, val) => acc += val) / input.length;
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -126,24 +126,17 @@ CHALLENGE 5
 
 Write a function named extractChildren that, given the array of characters from challenge 2, accomplishes the following:
 
-1) Uses filter to return an array of the characters that contain the letter 'a' in their
+1) Uses filter to return an array of the characters that contain the letter 'a' in their names.
 
 2) Then, uses reduce to return an array of all the children's names in the filtered array
 ------------------------------------------------------------------------------------------------*/
 
 const extractChildren = input => {
-  let answer = [];
-  let arr = input.filter(a => RegExp(/[a]/).test(a.name) && a.children);
-  let children = arr.reduce((acc, val) => {
-    acc.push(val.children);
+  let arr = input.filter(a => (/a/).test(a.name) && a.children);
+  return arr.reduce(( acc, val) => {
+    acc = acc.concat(val.children);
     return acc;
   }, []);
-  for (let i = 0; i < children.length; i++) {
-    for (let a = 0; a < children[i].length; a++){
-      answer.push(children[i][a]);
-    }
-  }
-  return answer;
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -180,7 +173,10 @@ const isPrime = (value) => {
 };
 
 const countPrimeNumbers = (input) => {
-  // Solution code here...
+  return input.reduce((acc, val) => {
+    isPrime(val) ? acc += 1 : acc;
+    return acc;
+  }, 0);
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -240,7 +236,10 @@ let starWarsData = [{
 }];
 
 const returnNames = (data) => {
-  // Solution code here...
+  return data.reduce((acc, val) => {
+    acc.push(val.name);
+    return acc;
+  }, []);
 };
 
 /*------------------------------------------------------------------------------------------------
