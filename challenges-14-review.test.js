@@ -146,7 +146,29 @@ const sortBy = (property, objs) => {
 // ------------------------------------------------------------------------------------------------
 
 const detectTicTacToeWin = (board) => {
-  // Solution code here...
+  function helper(r1, c1, r2, c2,r3, c3){
+    return board[r1][c1] !== '' && board[r1][c1] === board[r2][c2] && board[r1][c1] === board[r3][c3];
+  }
+
+  if (helper(0, 0, 0, 1, 0, 2)) {
+    return true;
+  }else if(helper(0, 0, 1, 0, 2, 0)){
+    return true;
+  } else if(helper(0, 1, 1, 1, 2, 1)){
+    return true;
+  }  else if(helper(0, 2, 1, 2, 2, 2)){
+    return true;
+  }  else if(helper(1, 0, 1, 1, 1, 2)){
+    return true;
+  }  else if(helper(2, 0, 2, 1, 2, 2)){
+    return true;
+  } else if(helper(0, 0, 1, 1, 2, 2)){
+    return true;
+  } else if(helper(2, 0, 1, 1, 0, 2)){
+    return true;
+  } else {
+    return false;
+  }
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -160,7 +182,7 @@ const detectTicTacToeWin = (board) => {
 // https:/missingslash.org returns false because url malformed
 // ------------------------------------------------------------------------------------------------
 const isSecure = (url) => {
-// Solution code here...
+  return url.includes('https://');
 };
 
 // ------------------------------------------------------------------------------------------------
