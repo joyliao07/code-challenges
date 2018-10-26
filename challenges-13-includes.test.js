@@ -51,7 +51,7 @@ const standardizePhoneNumbers = (phoneNumbers) => {
 // ------------------------------------------------------------------------------------------------
 
 const onlyOddChars = (str) => {
-  // Solution code here...
+  return str.split('').filter((item, index) => index % 2 === 1 ).join('');
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -137,7 +137,11 @@ const unenrollBrook = (roster) => {
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const sortByDay = (eventStrings) => {
-  // Solution code here...
+  return daysOfWeek.map( day => {
+    return eventStrings.filter((event) => {
+      return event.includes(day);
+    });
+  });
 };
 
 // ------------------------------------------------------------------------------------------------
