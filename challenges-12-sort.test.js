@@ -43,32 +43,7 @@ For example, ['Alphabet', 'alphabet', 'carrot', 'Zebra'] is correctly sorted, an
 ------------------------------------------------------------------------------------------------*/
 
 const alphabetizeBetter = (strs) => {
-  let upper = strs.map(word => word.toUpperCase());
-  let bubbleSort = (strs) => {
-    for (let i = 0; i < strs.length; i++) {
-      for (let j = 0; j < strs.length; j++) {
-        if (strs[j] > strs[j + 1]) {
-          let tmp = strs[j];
-          strs[j] = strs[j + 1];
-          strs[j + 1] = tmp;
-        }
-      }
-    }
-    return strs;
-  };
-
-  let sorted = bubbleSort(upper);
-  let answer = [];
-
-  for (let i = 0; i < sorted.length; i++) {
-    for (let a = 0; a < strs.length; a++) {
-      if (sorted[i].toUpperCase() === strs[a].toUpperCase()){
-        answer.push(strs[a]);
-      }
-    }
-  }
-
-  return answer;
+  return strs.sort( (a,b) => a.toLowerCase() > b.toLowerCase() ? 1 : (a.toLowerCase() < b.toLowerCase() ? -1 : 0) );
 
 };
 
@@ -120,7 +95,7 @@ const people = [
 ];
 
 const sortPeople = (people) => {
-  return people.sort((a, b) => a.lastName - b.lastName);
+  return people.sort((a, b) => a.lastName > b.lastName ? 1 : a.lastName < b.lastName ? -1 : 0);
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -132,7 +107,21 @@ If two people share the same last name, alphabetize on their first name. If two 
 ------------------------------------------------------------------------------------------------*/
 
 const sortPeopleBetter = (people) => {
-  // Solution code here...
+  return people.sort((a, b) => {
+    if (a.lastName > b.lastName){
+      return 1;
+    } else if (a.lastName < b.lastName){
+      return -1;
+    } else if (a.lastName === b.lastName){
+      if (a.firstName > b.firstName){
+        return 1;
+      } else if(a.firstName < b.firstName){
+        return -1;
+      } else if (a.firstName === b.firstName){
+        return a.age > b.age ? 1 : a.age < b.age ? -1 : 0;
+      }
+    }
+  });
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -158,7 +147,8 @@ const meetings = [
 ];
 
 const sortMeetingsByDay = (meetings) => {
-  // Solution code here...
+  const weekDay = { Monday:1, Tuesday:2, Wednesday:3, Thursday:4, Friday:5,};
+  return meetings.sort((a, b) => weekDay[a.dayOfWeek] - weekDay[b.dayOfWeek]);
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -172,7 +162,18 @@ You DO NOT need to use your solution to Challenge 9 in completing Challenge 10.
 ------------------------------------------------------------------------------------------------*/
 
 const sortSchedule = (meetings) => {
-  // Solution code here...
+  const weekDay = { Monday:1, Tuesday:2, Wednesday:3, Thursday:4, Friday:5,};
+
+  return meetings.sort((a, b) => {
+    if(weekDay[a.dayOfWeek] !== weekDay[b.dayOfWeek]){
+      return weekDay[a.dayOfWeek] > weekDay[b.dayOfWeek] ? 1 : -1;
+    }
+    else if(a.start !== b.start){
+      return a.start > b.start ? 1 : -1;
+    } else {
+      return a.end > b.end ? 1 : -1;
+    }
+  });
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -267,17 +268,17 @@ describe('Testing challenge 8', () => {
       new Person('Casey', 'Codefellows', 37),
       new Person('Charlie', 'Codefellows', 21),
       new Person('Charles', 'Codefellows', 29),
-      new Person('Carol', 'Codefellow', 88),
+      new Person('Carol', 'Codefellow', 88)
     ];
     expect(sortPeopleBetter(family)).toStrictEqual([
       new Person('Carol', 'Codefellow', 88),
       new Person('Casey', 'Codefellows', 37),
       new Person('Casey', 'Codefellows', 55),
       new Person('Charles', 'Codefellows', 29),
-      new Person('Charlie', 'Codefellows', 21),
+      new Person('Charlie', 'Codefellows', 21)
     ]);
-    expect(sortPeopleBetter([{firstName: 'andrew', lastName: 'apple'}, {firstName: 'andre', lastName: 'apple'}]))
-      .toStrictEqual([{firstName: 'andre', lastName: 'apple'}, {firstName: 'andrew', lastName: 'apple'}]);
+    expect(sortPeopleBetter([{firstName: 'andrew', lastName: 'apple',}, {firstName: 'andre', lastName: 'apple',}]))
+      .toStrictEqual([{firstName: 'andre', lastName: 'apple',}, {firstName: 'andrew', lastName: 'apple',}]);
   });
 });
 
@@ -299,7 +300,7 @@ describe('Testing challenge 10', () => {
       new Meeting('Tuesday', '1145', '1315'),
       new Meeting('Wednesday', '0930', '1000'),
       new Meeting('Wednesday', '1300', '1500'),
-      new Meeting('Friday', '1200', '1345'),
+      new Meeting('Friday', '1200', '1345')
     ]);
   });
 });
